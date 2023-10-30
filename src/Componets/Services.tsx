@@ -1,10 +1,12 @@
-
-import web from '../assets/services/service1.svg'
-import mobile from '../assets/services/mobile.svg'
-import seo from '../assets/services/seo.svg'
-import uiux from '../assets/services/uiux.svg'
-import maintenance from '../assets/services/maintenace.svg'
-import hosting from '../assets/services/hosting.svg'
+import React from 'react';
+import { motion } from 'framer-motion'; // Import the motion component from framer-motion
+import web from '../assets/services/service1.svg';
+import mobile from '../assets/services/mobile.svg';
+import seo from '../assets/services/seo.svg';
+import uiux from '../assets/services/uiux.svg';
+import maintenance from '../assets/services/maintenace.svg';
+import hosting from '../assets/services/hosting.svg';
+import { useInView } from 'react-intersection-observer';
 
 interface Service {
   title: string;
@@ -43,45 +45,49 @@ const services: Service[] = [
     desc: 'We provide a secure and reliable digital home for your website with top-notch server infrastructure and expert support.',
     icon: hosting,
   },
-  
 ];
 
-const Services:React.FC =()=> {
+const Services: React.FC = () => {
+  const [ref, inView] = useInView(); // Initialize the useInView hook
+
   return (
     <div className="max-w-[1440px] mx-auto mt-10 md:mt-28" id='services'>
-        <div className="mx-auto max-w-md px-4 text-center sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl">
-              <h2 className="text-base font-semibold tracking-wider text-primary-blue uppercase">Why choose us </h2>
-              <p className="mt-2 text-3xl font-bold text-primary-blue tracking-tight sm:text-4xl">
-              What We Offer
-              </p>
-              </div>
-    <ul role="list" className="grid grid-cols-1 gap-20 sm:grid-cols-2 lg:grid-cols-3 mt-20">
-      {services.map((service,index) => (
-        <li key={index} className="col-span-1 bg-white rounded-lg  shadow-lg  hover:bg-gray-100 px-10 mx-10 md:mx-1">
-          <div className="w-full flex items-center justify-between p-6 space-x-6">
-            <div>
+      <div className="mx-auto max-w-md px-4 text-center sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl">
+        <h2 className="text-base font-semibold tracking-wider text-primary-blue uppercase">Why choose us </h2>
+        <p className="mt-2 text-3xl font-bold text-primary-blue tracking-tight sm:text-4xl">
+          What We Offer
+        </p>
+      </div>
+      <ul role="list" className="grid grid-cols-1 gap-20 sm:grid-cols-2 lg:grid-cols-3 mt-20">
+        {services.map((service, index) => (
+          <motion.li
+            key={index}
+            ref={ref} // Attach the ref to the element
+            className="col-span-1 bg-white rounded-lg shadow-lg hover:bg-gray-100 px-10 mx-10 md:mx-1"
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : { opacity: 0 }} // Animate based on inView status
+            transition={{ duration: 0.5, delay: 0.2 * index }}
+          >
+            <div className="w-full flex items-center justify-between p-6 space-x-6">
+              <div>
                 <img className="object-cover" src={service.icon} alt="" />
-                
-            </div>
-          
-            <div className="flex-1 truncate">
-              <div className="flex items-center justify-center space-x-3">
-                <h1 className="text-primary-blue text-2xl font-bold truncate">{service.title}</h1>
-                
               </div>
-              
+
+              <div className="flex-1 truncate">
+                <div className="flex items-center justify-center space-x-3">
+                  <h1 className="text-primary-blue text-2xl font-bold truncate">{service.title}</h1>
+                </div>
+              </div>
             </div>
-            
-          </div>
-          <div>
-            <div className="p-5">
+            <div>
+              <div className="p-5">
                 <p className="text-primary-blue">{service.desc}</p>
+              </div>
             </div>
-          </div>
-        </li>
-      ))}
-    </ul>
+          </motion.li>
+        ))}
+      </ul>
     </div>
-  )
-}
+  );
+};
 export default Services;

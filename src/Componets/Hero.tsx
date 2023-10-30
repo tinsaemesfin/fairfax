@@ -1,5 +1,6 @@
 import Lottie from 'lottie-react'
 import animationData from '../assets/hero-animation.json'
+import { TypeAnimation } from 'react-type-animation'
 
 const Hero: React.FC = () => {
   return (
@@ -7,7 +8,15 @@ const Hero: React.FC = () => {
       <div className="px-4 lg:w-1/2  xl:pr-16">
         <h1 className="text-4xl tracking-tight font-bold text-primary-blue sm:text-4xl md:text-5xl lg:text-4xl xl:text-5xl">
           <span className="block ">Transforming Ideas into</span>
-          <span className="block text-secondary-golden  mt-3 ">Seamless Experiences</span>
+          <TypeAnimation sequence={[
+          "Seamless Experiences",
+          1500,
+          "Technological Marvels",
+          1500, 
+          'Industry Game-Changers',
+          1500,         
+        ]} speed={50}
+        repeat={Infinity} className="block text-secondary-golden  mt-3 "/>
         </h1>
         <p className="mt-3 max-w-md mx-auto text-lg text-primary-blue sm:text-xl md:mt-8 md:max-w-3xl font-normal">
           Tech agency, providing fresh, creative digital services to businesses who want to grow online. Focusing on results, we use our technical skill and industry insight to help you meet your digital goals.
