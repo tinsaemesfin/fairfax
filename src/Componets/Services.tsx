@@ -1,12 +1,12 @@
-import React from 'react';
-import { motion } from 'framer-motion'; // Import the motion component from framer-motion
+import React, { useRef } from 'react';
+import { motion, useInView } from 'framer-motion'; // Import the motion component from framer-motion
 import web from '../assets/services/service1.svg';
 import mobile from '../assets/services/mobile.svg';
 import seo from '../assets/services/seo.svg';
 import uiux from '../assets/services/uiux.svg';
 import maintenance from '../assets/services/maintenace.svg';
 import hosting from '../assets/services/hosting.svg';
-import { useInView } from 'react-intersection-observer';
+
 
 interface Service {
   title: string;
@@ -48,7 +48,8 @@ const services: Service[] = [
 ];
 
 const Services: React.FC = () => {
-  const [ref, inView] = useInView(); // Initialize the useInView hook
+  const ref = useRef(null)
+  const isInView = useInView(ref) // Initialize the useInView hook
 
   return (
     <div className="max-w-[1440px] mx-auto mt-10 md:mt-28" id='services'>
@@ -62,10 +63,9 @@ const Services: React.FC = () => {
         {services.map((service, index) => (
           <motion.li
             key={index}
-            ref={ref} // Attach the ref to the element
             className="col-span-1 bg-white rounded-lg shadow-lg hover:bg-gray-100 px-10 mx-10 md:mx-1"
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : { opacity: 0 }} // Animate based on inView status
+            initial={{ y: -50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 * index }}
           >
             <div className="w-full flex items-center justify-between p-6 space-x-6">
