@@ -1,5 +1,5 @@
-import React, { useRef } from 'react';
-import { motion, useInView } from 'framer-motion'; // Import the motion component from framer-motion
+import React from 'react';
+import { motion } from 'framer-motion'; // Import the motion component from framer-motion
 import web from '../assets/services/service1.svg';
 import mobile from '../assets/services/mobile.svg';
 import seo from '../assets/services/seo.svg';
@@ -48,8 +48,8 @@ const services: Service[] = [
 ];
 
 const Services: React.FC = () => {
-  const ref = useRef(null)
-  const isInView = useInView(ref) // Initialize the useInView hook
+  
+  
 
   return (
     <div className="max-w-[1440px] mx-auto mt-10 md:mt-28" id='services'>
